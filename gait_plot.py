@@ -3,10 +3,12 @@ import cv2
 import pandas as pd
 import numpy as np
 
-
+#initiating constants
 FILE_NAME = "Videos3/Ahmad_final.mp4"
 VIDEO_NAME = "Ahmad_final_graph"
 
+
+#initiating video capture
 capture = cv2.VideoCapture(FILE_NAME)
 
 out = cv2.VideoWriter('OUTPUT/'+VIDEO_NAME+".avi",
@@ -18,6 +20,8 @@ df = pd.read_csv("Angles.csv")
 frame = 0
 print((int((527/527)*1280),int(df.iloc[400][1])))
 print(len(df))
+
+
 
 
 plot = np.zeros((720,1280,3))

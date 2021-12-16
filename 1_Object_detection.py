@@ -2,16 +2,20 @@
 import cv2
 import pandas as pd
 
+#specifying constants
 FILE_NAME = "Videos3/Ahmad1.mp4"
 VIDEO_NAME = "Ahmad1last"
 N_TPOINTS = 3
 
+
+#initiating video capture and roi boxes
 capture = cv2.VideoCapture(FILE_NAME)
 
 success, image = capture.read()
 
 image2 = cv2.resize(image, (1920//2,1080//2))
 box = [[]]*N_TPOINTS
+
 
 for i in range(N_TPOINTS):
 	box[i] = list(cv2.selectROI("Tracked Object", image2 ,False))
@@ -21,22 +25,22 @@ print(box)
 
 
 # box = [[58, 868, 16, 26], [110, 772, 32, 30], [126, 688, 26, 24], [194, 692, 32, 26], [218, 766, 34, 26], [258, 852, 30, 34]]
+
+#Video saving
 for i in range(N_TPOINTS):
-	# if i==0:
-	# 	print('OUTPUT/'+VIDEO_NAME+f"{i}.avi")
-	# 	capture = cv2.VideoCapture('OUTPUT/'+VIDEO_NAME+f"{i}.avi")
-	# 	df = pd.read_csv("OUTPUT/"+VIDEO_NAME+f'{i}.csv')
-	# 	continue
-	# print(box)
-	# print(box[i] or "Failed")
+	
 	out = cv2.VideoWriter('OUTPUT/'+VIDEO_NAME+f"{i}.avi",
 		cv2.VideoWriter_fourcc(*"MJPG"),
 		fps = 30,frameSize=(1920,1080))
 	
+
+	#intiating tracker
 	tracker = cv2.TrackerCSRT_create()
 	success, image = capture.read()
 	tracker.init(image, box[i])
 
+
+	#recording info (fps)
 	fps_record = []
 	track_record = []
 	fps_count = 0
@@ -81,7 +85,6 @@ for i in range(N_TPOINTS):
 		#to close the loop and end the app
 		if cv2.waitKey(1) & 0xFF == ord("q"):
 			break
-	# print(min(fps_record),max(fps_record),sum(fps_record)/len(fps_record))
 
 	out.release()
 	capture.release()

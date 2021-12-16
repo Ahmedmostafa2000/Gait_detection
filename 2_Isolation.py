@@ -14,7 +14,7 @@ FILE_NAME = "Videos/Hesham1_light.mp4"
 VIDEO_NAME = "Hesham1_light"
 
 
-
+#isolating colors
 cv2.namedWindow("TrackBars")
 cv2.resizeWindow("TrackBars",640,300)
 cv2.createTrackbar("Hue Min","TrackBars",0,179,empty)
@@ -25,10 +25,10 @@ cv2.createTrackbar("Val Min","TrackBars",153,255,empty)
 cv2.createTrackbar("Val Max","TrackBars",255,255,empty)
 
 
+
+#initiating video capturing
 capture = cv2.VideoCapture(FILE_NAME)
-# out = cv2.VideoWriter('output/'+VIDEO_NAME,
-# 	cv2.VideoWriter_fourcc(*'MP4V'),
-# 	fps = 30,frameSize = (720,480))
+
 success, image = capture.read()
 while True:
 	
@@ -40,6 +40,8 @@ while True:
         
 	image = cv2.resize(image, (1920//3,1080//3))
 	imageHSV = cv2.cvtColor(image,cv2.COLOR_BGR2HSV)
+
+	#specifying isolating criteria
 	h_min = cv2.getTrackbarPos("Hue Min","TrackBars")
 	h_max = cv2.getTrackbarPos("Hue Max", "TrackBars")
 	s_min = cv2.getTrackbarPos("Sat Min", "TrackBars")

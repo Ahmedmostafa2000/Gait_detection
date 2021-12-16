@@ -1,13 +1,20 @@
 import cv2
 import mediapipe as mp
 import pandas as pd
+
+#initiating mediapipe
 mp_drawing = mp.solutions.drawing_utils
 mp_pose = mp.solutions.pose
 
+
+#initiating constants
 FILE_NAME = "Videos3/Ahmad1.mp4"
 VIDEO_NAME = "Ahmad1last"
 N_TPOINTS = 6
 
+
+
+#initiating video caputure
 cap = cv2.VideoCapture(FILE_NAME)
 
 
@@ -15,6 +22,8 @@ cap = cv2.VideoCapture(FILE_NAME)
 out = cv2.VideoWriter('OUTPUT/'+VIDEO_NAME+".avi",
 		cv2.VideoWriter_fourcc(*"MJPG"),
 		fps = 60,frameSize=(1920,1080))
+
+#initiating records
 pose_lms = [0]*32
 record = []
 frame = 0

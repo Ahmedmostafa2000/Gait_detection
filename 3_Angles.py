@@ -2,7 +2,7 @@ import math
 import pandas as pd
 import numpy as np
 
-
+#calculating angles
 hip = pd.read_csv("OUTPUT/Ahmad/Ahmad12.csv")
 knee = pd.read_csv("OUTPUT/Ahmad/Ahmad11.csv")
 anckle = pd.read_csv("OUTPUT/Ahmad/Ahmad10.csv")
